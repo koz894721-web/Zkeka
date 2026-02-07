@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLBB Diamond Top-Up Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>💎 MLBB Diamond Store</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#packages">Packages</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home" class="hero">
+                <h2>Welcome to MLBB Diamond Top-Up Store</h2>
+                <p>Get your diamonds quickly and securely!</p>
+                <button class="cta-button" onclick="scrollToPackages()">Get Started</button>
+            </section>
+
+            <section id="packages" class="packages">
+                <h2>Diamond Packages</h2>
+                <div class="package-grid">
+                    <div class="package-card">
+                        <h3>50 Diamonds</h3>
+                        <p class="price">$1.99</p>
+                        <button class="buy-button" onclick="selectPackage(50, 1.99)">Buy Now</button>
+                    </div>
+                    <div class="package-card">
+                        <h3>100 Diamonds</h3>
+                        <p class="price">$3.99</p>
+                        <button class="buy-button" onclick="selectPackage(100, 3.99)">Buy Now</button>
+                    </div>
+                    <div class="package-card">
+                        <h3>250 Diamonds</h3>
+                        <p class="price">$9.99</p>
+                        <button class="buy-button" onclick="selectPackage(250, 9.99)">Buy Now</button>
+                    </div>
+                    <div class="package-card">
+                        <h3>500 Diamonds</h3>
+                        <p class="price">$19.99</p>
+                        <button class="buy-button" onclick="selectPackage(500, 19.99)">Buy Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="checkout" class="checkout-section" style="display:none;">
+                <h2>Checkout</h2>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="playerId">Player ID:</label>
+                        <input type="text" id="playerId" name="playerId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Diamonds: <span id="diamondAmount">0</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount: $<span id="amountValue">0.00</span></label>
+                    </div>
+                    <button type="submit" class="checkout-button">Proceed to Payment</button>
+                    <button type="button" class="cancel-button" onclick="cancelCheckout()">Cancel</button>
+                </form>
+            </section>
+
+            <section id="contact" class="contact">
+                <h2>Contact Us</h2>
+                <p>Email: support@mlbbstore.com</p>
+                <p>Phone: 1-800-MLBB-TOP</p>
+                <p>Hours: 24/7 Customer Support</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 MLBB Diamond Store. All rights reserved.</p>
+            <p>Secure Payment | Fast Delivery | 24/7 Support</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
