@@ -1,49 +1,73 @@
 const express = require('express');
-const cors = require('cors');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+
+// Initialize Express
 const app = express();
-const port = 3000;
+app.use(bodyParser.json());
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// MongoDB connection setup
+mongoose.connect('mongodb://localhost:27017/yourdbname', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
 
-// API Endpoints
-app.get('/check-player', (req, res) => {
-    // Logic to check player
-    res.send('Player check endpoint');
+// Middleware for JWT authentication
+const authenticateJWT = (req, res, next) => {
+    const token = req.header('x-auth-token');
+    if (!token) return res.sendStatus(403);
+    
+    jwt.verify(token, 'your_jwt_secret', (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+};
+
+// User endpoints
+app.post('/check-player', (req, res) => {
+    // Implementation here...
 });
 
 app.post('/top-up', (req, res) => {
-    // Logic to top-up a player
-    res.send('Top-up endpoint');
+    // Implementation here...
 });
 
 app.post('/payment', (req, res) => {
-    // Logic to handle payment
-    res.send('Payment endpoint');
+    // Implementation here...
 });
 
 app.post('/payment-callback', (req, res) => {
-    // Logic for payment callback
-    res.send('Payment callback endpoint');
+    // Implementation here...
 });
 
-app.use('/admin', (req, res, next) => {
-    // Admin middleware for authentication
-    next();
+// Admin endpoints
+app.post('/admin/login', (req, res) => {
+    // Implementation here...
 });
 
-app.get('/admin/dashboard', (req, res) => {
-    // Logic for admin dashboard
-    res.send('Admin dashboard');
+app.get('/admin/dashboard', authenticateJWT, (req, res) => {
+    // Implementation here...
 });
 
-// Error Handling Middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+app.get('/admin/orders', authenticateJWT, (req, res) => {
+    // Implementation here...
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.get('/admin/payments', authenticateJWT, (req, res) => {
+    // Implementation here...
+});
+
+app.get('/admin/users', authenticateJWT, (req, res) => {
+    // Implementation here...
+});
+
+app.get('/admin/settings', authenticateJWT, (req, res) => {
+    // Implementation here...
+});
+
+// Server listening
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
